@@ -1,6 +1,7 @@
 from django.core import mail
 from selenium.webdriver.common.keys import Keys
 import re
+import time
 
 from .base import FunctionalTest
 
@@ -23,7 +24,7 @@ class LoginTest(FunctionalTest):
             'Check your email',
             self.browser.find_element_by_tag_name('body').text
         ))
-
+        
         # She checks her email and finds a message
         email = mail.outbox[0]
         self.assertIn(TEST_EMAIL, email.to)
