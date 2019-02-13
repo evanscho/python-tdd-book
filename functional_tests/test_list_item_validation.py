@@ -74,15 +74,12 @@ class ItemValidationTest(FunctionalTest):
         ))
 
         # She starts typing in the input box to clear the error
-        print('sending key')
         self.get_item_input_box().send_keys('a')
-        print('key sent')
 
         # She is pleased to see that the error message disappears
         self.wait_for(lambda: self.assertFalse(
             self.get_error_element().is_displayed()
         ))
-        print('passed error')
 
     def test_error_messages_are_cleared_on_textbox_click(self):
         # Edith starts a list and causes a validation error:
@@ -96,12 +93,9 @@ class ItemValidationTest(FunctionalTest):
         ))
 
         # She clicks inside the input box to clear the error
-        print('clicking')
         self.get_item_input_box().click()
-        print('clicked')
 
         # She is pleased to see that the error message disappears
         self.wait_for(lambda: self.assertFalse(
             self.get_error_element().is_displayed()
         ))
-        print('clicking test done')
