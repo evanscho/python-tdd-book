@@ -8,7 +8,7 @@ from.server_tools import reset_database
 import os
 import time
 
-MAX_WAIT = 20
+MAX_WAIT = 40
 SCREEN_DUMP_LOCATION = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'screendumps'
 )

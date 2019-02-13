@@ -96,9 +96,12 @@ class ItemValidationTest(FunctionalTest):
         ))
 
         # She clicks inside the input box to clear the error
+        print('clicking')
         self.get_item_input_box().click()
+        print('clicked')
 
         # She is pleased to see that the error message disappears
         self.wait_for(lambda: self.assertFalse(
             self.get_error_element().is_displayed()
         ))
+        print('clicking test done')
