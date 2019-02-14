@@ -159,3 +159,11 @@ EMAIL_HOST_USER = 'evanschomedical@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+#xUnit
+
+if 'XUNIT_REPORT' in os.environ:
+    TEST_RUNNER = 'xmlrunner.extra.djangotestrunner.XMLTestRunner'
+    TEST_OUTPUT_VERBOSE = True
+    TEST_OUTPUT_DESCRIPTIONS = True
+    TEST_OUTPUT_DIR = './tmp'
