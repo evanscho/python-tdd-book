@@ -5,24 +5,36 @@
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
 
 {% block table %}
-  <table id="id_list_table" class="table">
+  <ul id="id_list_table" class="list-group">
     {% for item in list.item_set.all %}
-      <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+      <li class="list-group-item border-left-0 border-right-0"
+        >{{ forloop.counter }}: {{ item.text }}</li>
     {% endfor %}
-  </table>
+  </ul>
 {% endblock %}
 
 {% block sharing_section %}
-  <form class="navbar-form navbar-center"
-      method="POST"
-      action="{% url 'share_list' list.id %}">
-    <div class="form-group">
-      <label for="sharee">Enter email to share with:</label>
-      <input class="form-control"
-             name="sharee"
-             type="text"
-             placeholder="your-friend@example.com" />
-      {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h6>List shared with:</h6>
+        <ul id="id_shared_by_table" class="list-group">
+        {% for item in list.shared_with.all %}
+          <li class="list-group-item border-0 py-1"
+            ><small>{{ forloop.counter }}: {{ item.email }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+      <div class="col mx-3">
+        <h6>Share this list:</h6>
+        <form method="POST" action="{% url 'share_list' list.id %}">
+          <input class="form-control"
+                 name="sharee"
+                 type="text"
+                 placeholder="your-friend@example.com" />
+          {% csrf_token %}
+        </form>
+      </div>
     </div>
-  </form>
+  </div>
 {% endblock %}
