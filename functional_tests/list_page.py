@@ -1,6 +1,8 @@
 from selenium.webdriver.common.keys import Keys
 from .base import wait
 
+import time
+
 
 class ListPage(object):
 
@@ -33,7 +35,7 @@ class ListPage(object):
 
     def get_shared_with_list(self):
         return self.test.browser.find_elements_by_css_selector(
-            '.list-sharee'
+            '#id_shared_by_list'
         )
 
     def share_list_with(self, email):
