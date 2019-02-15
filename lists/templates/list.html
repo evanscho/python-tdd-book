@@ -11,3 +11,16 @@
     {% endfor %}
   </table>
 {% endblock %}
+
+{% block sharing_section %}
+  <form class="navbar-form navbar-center"
+      method="POST"
+      action="{% url 'share_list' list.id %}">
+    <span>Enter email to share with:</span>
+    <input class="form-control"
+           name="sharee"
+           type="text"
+           placeholder="your-friend@example.com" />
+    {% csrf_token %}
+  </form>
+{% endblock %}
