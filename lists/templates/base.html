@@ -4,7 +4,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+          shrink-to-fit="no">
     <title>To-Do lists</title>
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/base.css" rel="stylesheet">
@@ -13,27 +14,29 @@
   <body>
     <div class="container">
 
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">Superlists</a>
-          {% if user.email %}
-            <ul class="nav navbar-nav navbar-left">
-              <li><a href="{% url 'my_lists' user.email %}">My lists</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="navbar-text">Logged in as {{ user.email }}</li>
-              <li><a href="{% url 'logout' %}">Log out</a></li>
-            </ul>
-          {% else %}
-            <form class="navbar-form navbar-right"
-                  method="POST"
-                  action="{% url 'send_login_email' %}">
-              <span>Enter email to log in:</span>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+        <a class="navbar-brand" href="/">Superlists</a>
+        {% if user.email %}
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'my_lists' user.email %}">My lists</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="navbar-text">Logged in as {{ user.email }}</li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+          </ul>
+        {% else %}
+          <form class="form-inline ml-auto"
+                method="POST"
+                action="{% url 'send_login_email' %}">
+            <div class="form-group">
+              <label class="pr-2" for="email" > Enter email to log in:</label>
               <input class="form-control" name="email" type="text" />
               {% csrf_token %}
-            </form>
-          {% endif %}
-        </div>
+            </div>
+          </form>
+        {% endif %}
       </nav>
 
       {% if messages %}
@@ -50,10 +53,11 @@
         </div>
       {% endif %}
 
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3 jumbotron">
+      <div class="d-flex justify-content-center pt-3">
+        <div class="col-md-9 col-md-offset-3 jumbotron">
           <div class="text-center">
             <h1>{% block header_text %}{% endblock %}</h1>
+            <h5><small>{% block owner_text %}{% endblock %}</small></h5>
             {% block list_form %}
               <form method="POST" action="{% block form_action %}{% endblock %}">
                 {{ form.text }}
@@ -69,22 +73,33 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+      <div class="d-flex justify-content-center pt-3">
+        <div class="col-md-9 col-md-offset-3">
           {% block table %}
           {% endblock %}
         </div>
       </div>
 
-      <div class="row">
+      <div class="d-flex justify-content-center pt-3">
         <div class="col-md-6 col-md-offset-3">
           {% block extra_content %}
           {% endblock %}
         </div>
       </div>
 
+      <div class="d-flex justify-content-center pt-3">
+        <div class="col-md-9 col-md-offset-3">
+          {% block sharing_section %}
+          {% endblock %}
+        </div>
+      </div>
+
     </div>
+
+    <!-- jQuery and Bootstrap JS bundled with Popper.js -->
     <script src="/static/jquery-3.3.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+
     <script src="/static/list.js"></script>
 
     <script>
